@@ -11,7 +11,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
-NUM_REV = 10
+NUM_REV = 607
 
 def get_soup(url):
     '''
@@ -31,8 +31,13 @@ def get_soup(url):
     options.add_argument('--incognito')
     options.add_argument('--headless')
     driver = webdriver.Chrome(executable_path = r'C:\Users\Dhruval\Downloads\chromedriver_win32\chromedriver.exe', chrome_options=options)
+    # driver = webdriver.PhantomJS(executable_path = r'C:\Users\Dhruval\Downloads\phantomjs-2.1.1-windows\phantomjs-2.1.1-windows\bin\phantomjs')
     driver.get(url)
-    
+
+    #Code to click on traveltype checkbox
+    # wait = WebDriverWait(driver, 10)
+    # element = wait.until(EC.element_to_be_clickable((By.ID, 'TravelTimeFilter_0')))
+
     page_source = driver.page_source
     soup = BeautifulSoup(page_source, 'html.parser')
 
@@ -42,6 +47,10 @@ def get_soup(url):
 def parse_reviews(soup_obj):
     '''
     '''
+    if soup_obj == None:
+        print("Obj is empty")
+    else:
+        print("there is object")
 
     df = pd.DataFrame()
     df_title = pd.DataFrame()
@@ -67,22 +76,24 @@ def parse_reviews(soup_obj):
         k = k + 1
 
     # Rating
-    k = 0
-    for item in soup_obj.find_all('span', class_="ui_bubble_rating"):
-        bubble = item.attrs['class'][1]
-        print(bubble)
-        rating = re.search(r'\d', bubble)[0]
-        print(rating)
-        df_rating = df_rating.append(pd.DataFrame({'key': k, 'Rating': rating}, index=[0]), ignore_index=True)
-        k = k + 1
+    # k = 0
+    # for item in soup_obj.find_all('span', class_="ui_bubble_rating"):
+    #     bubble = item.attrs['class'][1]
+    #     rating = re.search(r'\d', bubble)[0]
+    #     df_rating = df_rating.append(pd.DataFrame({'key': k, 'Rating': rating}, index=[0]), ignore_index=True)
+    #     k = k + 1
     
-    #print(df_title)
-
-    df = pd.merge(df_title, df_rating, on='key')
-    # df = pd.merge(df_title, df_text, on='key')
-    # df = pd.merge(df, df_rating, on='key')
-    print(df)
-    return df
+    print("title", df_title)
+    print("text", df_text)
+    if df_title.empty and df_text.empty:
+        e_df = pd.DataFrame
+        return e_df
+    else:
+        #df = pd.merge(df_title, df_rating, on='key')
+        df = pd.merge(df_title, df_text, on='key')
+        # df = pd.merge(df, df_rating, on='key')
+        #print(df)
+        return df
 
 
 
@@ -100,10 +111,13 @@ def parse(url):
         print('offset', offset)
         url_ = url_update.format(offset)
         df2 = parse_reviews(get_soup(url_))
-        df = pd.concat([df, df2], ignore_index=True)
+        if df2.empty:
+            continue
+        else:
+            df = pd.concat([df, df2], ignore_index=True)
 
     df = df.drop(columns =['key'])
     
-    print(df)
-    #df.to_csv('hostel_reviews.csv')
+    #print(df)
+    df.to_csv('hotel_all_reviews.csv')
 
