@@ -10,7 +10,8 @@
 **Term:** Spring 2019
 
 ## Quick Links
-- **[Data](Data/)** *Raw and processed UN COMTRADE data for the nations analyzed*
-- **[Code](Code/)** *Code files for data prep and preliminary analysis*
-- **[Final Project Report](Documents/DhruvalBhatt_NetworkAnalysis_TermProjectReport.pdf)**
-- **[Presentation Slides](Documents/DhruvalBhatt_TermProjectPresentation.pdf)**
+- **[Data](data/)** *code file for scraping reviews and manually compiled TripAdvisor Review data*
+- **[Code](output/Code Files/)** *All code files for data prep, exploratory analysis and predictive model*
+- **[Project Proposal](docs/proposal/DhruvalBhatt_Proposal.pdf)**
+- **[Final Project Report](docs/final-paper/DhruvalBhatt_FinalPaper_PCR.pdf)**
+- **[Poster](docs/poster/DhruvalBhatt_Poster_June4.pdf)**
