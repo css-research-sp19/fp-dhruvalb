@@ -14,4 +14,4 @@
 - **[Code](output/Code%20Files/)** *All code files for data prep, exploratory analysis and predictive model*
 - **[Project Proposal](docs/proposal/DhruvalBhatt_Proposal.pdf)**
 - **[Final Project Report](https://github.com/css-research/fp-dhruvalb/blob/master/docs/final-paper/DhruvalBhatt_FinalPaper_PCR.pdf)**
-- **[Poster](docs/poster/DhruvalBhatt_Poster_June4.pdf)**
+- **[Poster](https://github.com/css-research/fp-dhruvalb/blob/master/docs/poster/DhruvalBhatt_Poster_June4.pdf)**
